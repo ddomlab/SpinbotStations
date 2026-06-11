@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Station</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0f0f0f;
+            color: #e0e0e0;
+            font-family: 'Courier New', monospace;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 1.2rem;
+            font-weight: normal;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #888;
+        }
+
+        h1 span {
+            color: #00e5ff;
+        }
+
+        .stream-container {
+            position: relative;
+            border: 1px solid #222;
+            background: #000;
+        }
+
+        .stream-container::before {
+            content: '● LIVE';
+            position: absolute;
+            top: 0.75rem;
+            left: 0.75rem;
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            color: #ff3b3b;
+            z-index: 10;
+            animation: blink 1.5s step-start infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        #stream {
+            display: block;
+            max-width: min(800px, 100%);
+            height: auto;
+        }
+
+        footer {
+            font-size: 0.75rem;
+            color: #444;
+            letter-spacing: 0.1em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>IMAGE <span>STATION</span></h1>
+    </header>
+
+    <div class="stream-container">
+        <img id="stream" src="/stream" alt="Live camera feed">
+    </div>
+
+    <footer>MJPEG · CAMERA 0 · {{ request.host }}</footer>
+</body>
+</html>
