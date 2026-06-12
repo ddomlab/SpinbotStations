@@ -4,6 +4,7 @@ from datetime import datetime
 
 
 def capture_image():
+    # Captures an image and places it in the captures directory with a timestamped filename
     cap = cv2.VideoCapture(0)
     if not cap.isOpened():
         print("Cannot open camera")
@@ -26,6 +27,6 @@ if __name__ == "__main__":
         # if the captured directory does not exist, create it
         os.makedirs(capture_dir)
     while True:
-        if input("Press Enter to capture an image (or type 'exit' to quit): ").lower() == 'exit':
+        if input("Press Enter to capture an image (or type 'q' to quit): ").lower() == 'q':
             break
         capture_image()
