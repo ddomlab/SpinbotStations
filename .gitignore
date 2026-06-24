@@ -1,2 +1,5 @@
 captures/
 .vscode/
+.env
+SpinbotStations/__pycache__
+*.pyc
