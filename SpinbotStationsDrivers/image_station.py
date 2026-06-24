@@ -21,14 +21,20 @@ class imagestation:
             raise RuntimeError("Can't receive frame")
         return True
 
-    def capture_image(self):
+    def capture(self) -> bytes:
+        """Grabs a single frame from the camera and returns it as
+        JPEG-encoded bytes
+        """
         self.check_camera()
-        ret, frame = self.cap.read()
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        filename = f"capture_{timestamp}.jpg"
-        filepath = os.path.join(self.capture_dir, filename)
-        cv2.imwrite(filepath, frame)
-        print(f"Image captured and saved as {filename}")
+        status, frame = self.cap.read()
+        if not status:
+            raise RuntimeError("Failed to read frame from camera")
+        
+        success, buffer = cv2.imencode('.jpg', frame)
+        if not success:
+            raise RuntimeError("Failed to encode from as JPEG")
+        
+        return buffer.tobytes()
 
     def start_stream(self):
         #TODO Need to finish this section

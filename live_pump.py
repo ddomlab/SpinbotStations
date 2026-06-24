@@ -1,7 +1,7 @@
 from flask import Flask, Response, render_template
 import cv2
 import threading
-from SpinbotStations import imagestation, sdc
+from SpinbotStationsDrivers import imagestation, sdc
 
 app = Flask(__name__)
 
