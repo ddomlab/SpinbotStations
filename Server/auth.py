@@ -12,8 +12,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 HTTP_KEY = os.environ.get("HTTP_API_KEY")
-ELN_KEY = os.environ.get("ELN_API_KEY")
-
 
 if not HTTP_KEY:
     raise RuntimeError("HTTP_API_KEY is not set. Please set before continuing")
