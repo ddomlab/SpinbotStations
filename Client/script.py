@@ -1,17 +1,29 @@
 import os
 from dotenv import load_dotenv
 from SpinbotStations import imagestation
+from elnclient import ElnClient
 
 load_dotenv()
+eln_key = os.environ.get("ELN_KEY")
+http_key = os.environ.get("HTTP_KEY")
+if eln_key == None or http_key == None:
+    raise ValueError("Missing eln and/or http key")
 
-ex = eln(debug=True)
-ex.init_experiment(title="Testing", desc="This is a test of the API I am working with")
-print(ex.id)
+img_station = imagestation(
+    pi_url='http://100.107.255.14:8080',
+    api_key=http_key 
+    )
 
+# img_station.capture(filename='substrate_cap')
 
-# station_1 = imagestation(
-#     pi_url='http://100.107.255.14:8080',
-#     api_key=os.environ.get("API_KEY") # type: ignore
-#     )
+experiment = ElnClient(
+    url="https://eln.ddomlab.org/api/v2",
+    api_key=eln_key,
+    title="Spinbot capture test",
+    desc="This is a test of the API I am working with"
+    )
 
-# img = station_1.capture(filename='testing')
+experiment.upload_file(
+    file_path=img_station.capture(filename='substrate_cap'), 
+    comment="Capture of substrate"
+    )

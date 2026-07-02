@@ -32,7 +32,7 @@ class imagestation:
         os.makedirs(name='captures/', exist_ok=True)
         with open(f'captures/{filename}', 'wb') as f:
             f.write(r.content)
-        return r
+        return str(f"captures/{filename}")
 
     def _send(self, info: str):
         def_header = {
