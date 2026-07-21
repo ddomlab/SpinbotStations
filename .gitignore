@@ -4,4 +4,5 @@ Server/captures/
 /home/image-station/code/Server/SpinbotStations/__pycache__
 *.pyc
 .gitignore
+Client/scialog_1.yaml
 Server/testing.py
