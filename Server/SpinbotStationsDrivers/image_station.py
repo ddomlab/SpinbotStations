@@ -6,7 +6,21 @@ from datetime import datetime
 
 class imagestation:
     def __init__(self, camera_index=0, capture_dir=None):
-        self.cap = cv2.VideoCapture(camera_index)
+        self.cap = cv2.VideoCapture(camera_index, cv2.CAP_V4L2)
+
+        self.cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)
+        self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1600)
+        self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1200)
+
+        actual_w = self.cap.get(cv2.CAP_PROP_FRAME_WIDTH)
+        actual_h = self.cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
+
+        if (actual_w, actual_h) != (1600, 1200):
+            raise RuntimeError(
+                f"Camera did not accept requested resolution: "
+                f"requested 1600x1200, got {int(actual_w)}x{int(actual_h)}"
+            )
+        
         self.check_camera()
 
         self.capture_dir = capture_dir if capture_dir else os.path.join(os.getcwd(), "captures")

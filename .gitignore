@@ -4,3 +4,4 @@ Server/captures/
 /home/image-station/code/Server/SpinbotStations/__pycache__
 *.pyc
 .gitignore
+Server/testing.py
